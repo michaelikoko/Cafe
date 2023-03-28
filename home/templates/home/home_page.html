@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+
+{% image page.hero_image scale-100  as image %}
+<!-- Hero section -->
+<div 
+    class="hero-section d-flex flex-column justify-content-center align-items-end" 
+    style="background-image:url('{{ image.url }}');  background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;"
+>
+    <div class="container">
+        <h1 class="hero-section-title">{{page.hero_title}}.</h1>
+        <p  class="fs-4 mt-3 hero-section-text">{{page.hero_text}}</p>
+    </div>
+</div>
+
+<!-- Other Sections section -->
+{% for block in page.other_sections %}
+    <div class="other-section pt-5 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-12  d-flex flex-column justify-content-center align-items-start text-start">
+                    {% for item in block.value.body %}
+                        <h3 class="text-uppercase fw-bold mb-4">{{ item.title }}</h3>
+                        {{ item.text | richtext }}
+                    {% endfor %}
+                </div>
+                <div class="col-md-6 col-12 d-flex flex-column justify-content-center align-items-center">
+                    {% image block.value.image original class="img img-fluid" %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+<!-- Home page text section -->
+<div class="bg-dark home-page-text-section d-flex flex-column justify-content-center align-items-start">
+    <div class="container">
+        <p class="text-white fs-2 text-start w-100  fw-bold">{{page.home_page_text}}</p>
+    </div>
+</div>
+
+<!-- Featured Menu Items section -->
+<div class="bg-light featured-menu-section">
+    <div class="container">
+        <h2 class="text-dark featured-menu-header">Featured Menu</h2>
+        <div class="row g-5 mt-4">
+            {% for featured_menu in page.featured_menus.all %}
+                <div class="col-md-6 col-12">
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <p class="text-dark fs-5 fw-semibold">{{ featured_menu.menu.name }}</p>
+                        <p class="text-dark fs-5 fw-semibold">&#36; {{ featured_menu.menu.price }}</p>
+                    </div>
+                    <p class="text-dark fs-6 fw-normal">{{ featured_menu.menu.description }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <a href="{% slugurl 'menu' %}" >
+            <button type="button" class="btn btn-dark btn-lg ps-5 pe-5 mt-5">
+                View Menu
+            </button>
+        </a>
+    </div>
+</div>
+
+<!-- Image Gallery section -->
+<div class="gallery-images-section pt-5 pb-5">
+    <div class="container mt-5 mb-5">
+        <div class="row g-5 ">
+            {% for item in page.gallery_images.all %}
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="img-hover-zoom overflow-hidden">
+                        {% image item.image original class="img img-fluid" %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Book a table section -->
+<div class="bg-dark home-page-text-section d-flex flex-column justify-content-center align-items-start">
+    <div class="container ">
+        <p class="text-white fs-2 text-start fw-bold">Book a table</p>
+        <p class="text-white fs-5 text-start fw-semibold mt-4">Acception a reservation any time</p>
+        <a href="{% slugurl 'book' %}" >
+            <button type="button" class="btn btn-light btn-lg ps-5 pe-5 mt-4">
+                Book a table
+            </button>
+        </a>
+    </div>
+</div>
+
+{% endblock %}

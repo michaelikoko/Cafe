@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-menupage{% endblock %}
+
+{% block content %}
+
+<!-- Menu Hero Section -->
+<div class="contact-page">
+    <div class="container">
+        <div class="row ">
+            <div class="col-lg-6 col-12 d-flex flex-column justify-content-around align-items-start">
+                <h1 class="text-uppercase fw-bold">Contact Us</h1>
+                <div class="row g-4">
+                    {% for item in page.contact_details.all %}
+                        <div class="col-md-6 col-12 d-flex flex-column justify-content-center align-items-start">
+                            <p class="text-uppercase fw-bold fs-5">{{ item.contact_info.title }}</p>
+                            <p class="fs-6">{{ item.contact_info.info }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="">
+                    {% image page.page_image original class="img img-fluid" %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

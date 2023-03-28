@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %}template-menupage{% endblock %}
+
+{% block content %}
+
+<!-- Menu Hero Section -->
+{% image page.menu_hero_image scale-100  as image %}
+<div 
+    class="menu-hero-section d-flex flex-column justify-content-center align-items-end" 
+    style="background-image:url('{{ image.url }}');  background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;"
+>
+    <div class="container">
+        <h1 class="menu-hero-section-text">{{page.menu_hero_text}}</h1>
+    </div>
+</div>
+
+<!-- Menu Items Section -->
+<div class="bg-light menu-items-section">
+    <div class="container">
+        <h2 class="text-dark featured-menu-header">Menu Items</h2>
+        <div class="row g-5 mt-4">
+            {% for item in page.menu_items.all %}
+                <div class="col-md-6 col-12">
+                    <div class="d-flex flex-row justify-content-between align-items-center">
+                        <p class="text-dark fs-5 fw-semibold">{{ item.menu.name }}</p>
+                        <p class="text-dark fs-5 fw-semibold">&#36; {{ item.menu.price }}</p>
+                    </div>
+                    <p class="text-dark fs-6 fw-normal">{{ item.menu.description }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Book a table section -->
+<div class="bg-dark home-page-text-section d-flex flex-column justify-content-center align-items-start">
+    <div class="container ">
+        <p class="text-white fs-2 text-start fw-bold">Book a table</p>
+        <p class="text-white fs-5 text-start fw-semibold mt-4">Acception a reservation any time</p>
+        <a href="{% slugurl 'book' %}" >
+            <button type="button" class="btn btn-light btn-lg ps-5 pe-5 mt-4">
+                Book a table
+            </button>
+        </a>
+    </div>
+</div>
+
+{% endblock %}
