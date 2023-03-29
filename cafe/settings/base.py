@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     'whitenoise.runserver_nostatic',  # <-- Updated!
     "django.contrib.staticfiles",
+    'cloudinary_storage',
+    'cloudinary',
     'wagtail.contrib.modeladmin',  
     'wagtailmenus',
     'crispy_forms',
@@ -54,6 +56,8 @@ INSTALLED_APPS = [
     'wagtailmarkdown',
     "captcha",
     "wagtailcaptcha",
+
+    
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
