@@ -19,6 +19,7 @@ npm-debug.log*
 /.cache/
 /.pytest_cache/
 media
+staticfiles
 /storybook-static
 
 ### JetBrains
