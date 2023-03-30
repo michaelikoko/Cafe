@@ -11,8 +11,19 @@ ALLOWED_HOSTS = ["*"]
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
+#import cloudinary
+#import cloudinary_storage
+#import environ
 
+#env = environ.Env()
 
+#CLOUDINARY_STORAGE = {
+#    'CLOUD_NAME':  'dmdm4nogv',
+#    'API_KEY': '812873894272894',
+#    'API_SECRET': 'FnQ1YngbzUbpgQXqGATKbLXwkJI',
+#}
+
+#DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 try:
     from .local import *
